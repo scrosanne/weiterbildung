@@ -19,15 +19,20 @@ export function BasicInput({
 }: BasicInputProps) {
   return (
     <div className="mb-4">
+      <label>{placeholder}</label>
       <input
         {...register(name, {
           required: `${placeholder} is required`
         })}
         type={type}
         placeholder={placeholder}
-        className="p-2 border border-gray-300 rounded-md w-full text-neutral-600"
+        className="appearance-none border rounded w-full py-2 px-3 focus:outline-none"
       />
-      {errors[name] && <p>{errors[name]?.message}</p>}
+      {errors[name] && (
+        <p className="text-red-500 text-xs italic mt-1">{errors[name]?.message}</p>
+      )}
     </div>
   );
 }
+
+

@@ -11,7 +11,8 @@ export default function FormWithReactHookForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isSubmitting },
+    reset
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema)
   });
@@ -19,14 +20,21 @@ export default function FormWithReactHookForm() {
   async function onSubmit(data: FormSchemaType) {
     const result = await addEntry(data);
     console.log(result);
-    console.log(data);
+    reset();
   }
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="bg-gray-200 flex justify-center items-center h-screen">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="p-10 border-slate-200 border rounded-xl">
+        className="p-10 bg-white border-slate-200 border rounded-xl w-1/3">
+        <BasicInput
+          name="name"
+          type="text"
+          placeholder="Name"
+          register={register}
+          errors={errors}
+        />
         <BasicInput
           name="email"
           type="email"
@@ -41,7 +49,7 @@ export default function FormWithReactHookForm() {
           register={register}
           errors={errors}
         />
-        <BasicButton>Submit</BasicButton>
+        <BasicButton isSubmitting={isSubmitting}>Submit</BasicButton>
       </form>
     </div>
   );

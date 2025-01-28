@@ -1,7 +1,15 @@
-export function BasicButton({ children }: { children: React.ReactNode }) {
+type BasicButtonProps = {
+  children: React.ReactNode;
+  isSubmitting: boolean;
+};
+
+export function BasicButton({ children, isSubmitting }: BasicButtonProps) {
   return (
-    <button className="bg-slate-300 p-2 rounded text-slate-700" type="submit">
-      {children}
+    <button
+      className="disabled:bg-slate-300 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+      type="submit"
+      disabled={isSubmitting}>
+      {isSubmitting ? 'Submitting...' : children}
     </button>
   );
 }
