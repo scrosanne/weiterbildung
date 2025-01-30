@@ -49,7 +49,9 @@ export default function FormWithReactHookForm() {
           register={register}
           errors={errors}
         />
-        <BasicButton isSubmitting={isSubmitting}>Submit</BasicButton>
+        <BasicButton errors={errors} isSubmitting={isSubmitting}>
+          Submit
+        </BasicButton>
       </form>
     </div>
   );

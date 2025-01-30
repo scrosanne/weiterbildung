@@ -2,13 +2,12 @@
 
 import { formSchema, FormSchemaType } from '@/schema/formSchema';
 
-function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export async function addEntry(data: FormSchemaType) {
-  await delay(2000);
+  await new Promise(resolve => setTimeout(resolve, 1000));
+
   const result = formSchema.safeParse(data);
+
+  console.log(result);
 
   if (result.success) {
     return {
